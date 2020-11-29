@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
+using RandomAPIs.Model;
+
+namespace RandomAPIs.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [EnableCors("MyPolicy")]
+
+    public class RandomController : ControllerBase
+    {
+        // GET: api/Random
+        [HttpGet]
+        public int Get()
+        {
+            Random random = new Random();
+            // Any random integer   
+            return random.Next();
+        }
+
+      
+        [HttpPost]
+        public double Post()
+        {
+            Random random = new Random();
+            return random.NextDouble();
+        }
+
+        // PUT: api/Random/5
+        [HttpPut]
+        public string Put()
+        {
+            return "Thank you for the new number!";
+        }
+
+        // DELETE: api/ApiWithActions/
+        [HttpDelete]
+        public char Delete()
+        {
+            Random random = new Random();
+            double flt = random.NextDouble();
+            int shift = Convert.ToInt32(Math.Floor(25 * flt));
+            return Convert.ToChar(shift + 65);
+        }
+
+
+        [HttpPatch]
+        public DateTime Patch()
+        {
+            return DateTime.Now;
+        }
+
+    }
+}
